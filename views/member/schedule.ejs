@@ -1,0 +1,57 @@
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.js"></script>
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.css">
+  <script src="https://momentjs.com/downloads/moment.js"></script>
+  <style>
+            #calendar {
+  max-width: 1100px;
+  margin: 40px auto;
+}
+        </style>
+</head>
+<div id=“schedule”>
+  <% let arrayStartDate=[]%>
+    <% let arrayEndDate=[]%>
+      <% let arrayType=[]%>
+        <% results.classes.forEach((result)=>{%>
+            <%
+              arrayStartDate.push(moment(result.startDate).format())%>
+              <%
+                arrayEndDate.push(moment(result.endDate).format())%>
+                <% arrayType.push(result.type)%>
+                  <%})%>
+                  </div>
+                  <div id='calendar'></div>
+
+
+                  <script>
+ let arrayStart="<%=arrayStartDate%>"
+ let arrayEnd="<%=arrayEndDate%>"
+let arrayType="<%=arrayType%>"
+const mapArrays = (title, start,end) => {
+   const res = [];
+   for(let i = 0; i < title.length; i++){
+      res.push({
+        title: title[i],
+        start: start[i],
+        end:end[i]
+      });
+   };
+   return res;
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    initialDate: '2021-04-21',
+    
+    displayEventTime: true,
+    events:mapArrays(arrayType.split(","), arrayStart.split(","),arrayEnd.split(","))
+  });
+
+  calendar.render();
+});
+
+</script>

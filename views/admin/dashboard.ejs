@@ -1,0 +1,53 @@
+
+  <head>
+
+    <style>
+    canvas{
+      height: 5px;
+      width: 5px;
+    }.footer{
+      position: fixed;
+    }
+  </style>
+  </head>
+    <canvas style="display: block;" id="myChart"></canvas>
+    <!-- Start Js -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script>
+    let ctx = document.querySelector('#myChart').getContext('2d');
+
+    let myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["Female", "Male"],
+        datasets: [{
+          label: '#',
+          data: ["<%= female %>"," <%= male %>"],
+          backgroundColor: [
+            'rgba(161, 193, 129)',
+            'rgba(252, 202, 70)'
+             ],
+          
+          borderWidth: 1
+        }]
+     },
+     options: {
+         scales: {
+             yAxes: [{
+                 ticks: {
+                     beginAtZero:true
+                 }
+             }]
+         },
+         title: {
+            display: true,
+            text: 'Members Based on Gender',
+            fontSize: 18
+        }
+     }
+    }); // end chart obj
+
+  </script>
+  </body>
+</html>

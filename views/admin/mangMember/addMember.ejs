@@ -1,0 +1,69 @@
+<div class="container" style="background-color: unset;box-shadow: unset">
+    <div class="row">
+        <div class="col-lg-6 col-md-offset-3">
+            <h1>Add a New Member</h1>
+            <form method="post" action="/admin/addMember">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="category_name">Name: </label>
+                            <input type="text" id="category_name"
+                                class="form-control" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="category_name">Email: </label>
+                            <input type="email" id="category_name"
+                                class="form-control" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="category_name">Mobile No: </label>
+                            <input type="tel" id="phone" name="mobile"
+                                placeholder="+966000000000" pattern="+[0-9]{12}"
+                                required
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="product_price">Weight: </label>
+                            <input type="text" id="product_price"
+                                class="form-control" name="weight">
+                        </div>
+                        <div class="form-group">
+                            <label for="product_price">Birth Date: </label>
+                            <input type="date" id="product_price"
+                                class="form-control" name="birthDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="product_price">Height: </label>
+                            <input type="text"
+                                class="form-control" name="height">
+                        </div>
+                        <div class="form-group">
+                            <label for="product_price">Gender: </label>
+                            <input type="radio"
+                                name="gender" value="male"> Male
+                            <input type="radio"
+                                name="gender" value="female"> Female
+                        </div>
+
+                        <button style="text-align: center;" type="submit">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const btn = document.querySelector('#btn');
+    // handle click button
+    btn.onclick = function () {
+        const rbs = document.querySelectorAll('input[name="gender"]');
+        let selectedValue;
+        for (const rb of rbs) {
+            if (rb.checked) {
+                selectedValue = rb.value;
+                break;
+            }
+        }
+        alert(selectedValue);
+    };
+</script>

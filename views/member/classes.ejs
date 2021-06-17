@@ -1,0 +1,479 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes</title>
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+        body{
+            background-color: #f8f9fa;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .categories {
+            text-align: center;
+            padding-bottom: 10px;
+        }
+
+        #id1 {
+            background-image: url("https://images.unsplash.com/photo-1614928228179-b64618192edc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            margin: 0px;
+            
+        }
+
+        #id1 h1 {
+            color: #FE6B0A;
+            font-weight: bold;
+        }
+
+        #id1 p {
+            color: #FEECB9;
+        }
+
+        .newcolor {
+            background-color: #73A798;
+        }
+
+        .container {
+            background-color: unset;
+            border-radius: unset;
+            box-shadow: unset;
+            padding: 10px;
+            width: 80%;
+        }
+
+        .card {
+            border: unset;
+            border-radius: unset;
+            -webkit-box-shadow: unset;
+            box-shadow: unset;
+            transition: all 0.3s ease-in-out;
+            padding: unset;
+            margin: 10px;
+            position: unset;
+            will-change: transform;
+        }
+
+        .row {
+            min-height: unset;
+        }
+        
+        .added_margin {
+            margin: 10px;
+        }
+
+        .header__content{
+    width: 70%;
+    background-color:#233d4de7 ;
+    color:#F4A261 ;
+    text-align: center;
+    padding: 80px;
+    transform: skew(15deg);
+}
+
+.header__content > * {
+transform: skew(-15deg);
+}
+
+    </style>
+</head>
+<% var membershipFlag = false %> 
+<% if(currentMember){ %>
+<% if (currentMember.membership){membershipFlag = true %> 
+
+<% var limit %> 
+<% membershipResults.forEach(membershipResults => {  %>
+<% if (currentMember.membership.equals(membershipResults._id)) { %>
+    <% limit = membershipResults.limit} %>  
+<% })   %> 
+<% } }%> 
+
+
+<main>
+
+    <div id="id1" class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto header__content">
+                <h1 class="fw-light" style="font-size: 60px;">Classes</h1>
+                <p class="lead" style="font-size: 24px;">Anytime fitness offers a range of classes that
+                    will inspire you to explore new
+                    workout programs and gym classes while keeping you motivated
+                    with other like-minded members.</p>
+
+            </div>
+        </div>
+    </div>
+    <div id="testing" class="album py-5 bg-light">
+        <h1 class="fw-light categories" textalign="center" style="color: #233d4d; font-size: 50px;">Categories</h1>
+        <div style="text-align: center;align-items: center;">
+        <hr width="77%" style="margin: auto;">
+        </div>
+        <div class="container">
+            <div class="row services">
+                <%results.forEach(results => {  %>
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <img src="<%=results.img%>" alt="as" width="100%" height="225">
+                        <div class="csard-body text-left added_margin">
+                            <h2><%= results.type %></h2>
+                            <p class="card-text"><%= results.description %></p>
+                            <div>
+                                <small class="text-muted">
+                                    <%= "Class Time : " +
+                                        results.startDate.toLocaleString('en-US', { hour: 'numeric'}) 
+                                        + 
+                                        " - " 
+                                        + 
+                                        results.endDate.toLocaleString('en-US', { hour: 'numeric'}) %>
+                                </small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+
+                                
+                                <% if(currentMember){ %>
+                                    <% if(!membershipFlag){ %>
+                                        <button type="submit" class="btn btn-dark disabled">
+                                            Join Now!</button>
+                                            <p class="card-text" style="color: tomato;"> need to purchase a membership first! </p> 
+                                        <% }else{ %>  
+                                <% var flag = false %>
+                                <%for (let index = 0; index < currentMember.classes.length; index++) { %>
+                                <% if( currentMember.classes[index].equals(results._id)) {%>
+                                    <%  flag = true %> 
+                                    <% }} %>
+                                    <% if (flag){ %> 
+                                    <button type="submit" class="btn btn-dark disabled">
+                                        Join Now!</button>
+                                        <p class="card-text" style="color: tomato;"> already registered 
+
+
+                                    <% }else if (currentMember.classes.length >= limit){ %> 
+                                    <button type="submit" class="btn btn-dark disabled">
+                                        Join Now!</button>
+                                        <p class="card-text" style="color: tomato;"> reached maximum class limit of <%= limit %> </p> 
+
+                                  <% } else { %> 
+
+                                <form method="POST" action="/member/registerClass/<%= results._id %>">
+                                    <button type="submit" class="btn btn-warning">
+                                        Join Now!</button>
+                                  </form>
+                                <% }} %> 
+                                <% } else { %>
+                                    <button type="submit" class="btn btn-dark disabled">
+                                        Join Now!</button>
+                                        <p class="card-text" style="color: tomato;"> Need to login first! </p> 
+                                <% } %>  
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%  })%>
+
+                <!-- <div class="col-md-4">
+
+                    <div class="card shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1588&q=80"
+                            alt="as" width="100%" height="225">
+                        <div class="card-body text-left">
+                            <h2>Yoga</h2>
+                            <p class="card-text">Yoga uses breathing techniques,
+                                exercise and meditation. It helps
+                                to improve health and happiness.</p>
+                            <div>
+                                <small class="text-muted">Class Time: 4:00pm -
+                                    5:00pm</small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning">
+                                    Join Now!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+               <!-- <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80"
+                            alt="as" width="100%" height="225">
+                        <div class="card-body text-left">
+                            <h2>Strength</h2>
+                            <p class="card-text">Yoga uses breathing techniques,
+                                exercise and meditation. It helps
+                                to improve health and happiness.</p>
+                            <div>
+                                <small class="text-muted">Class Time: 4:00pm -
+                                    5:00pm</small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning">
+                                    Join Now!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1535743686920-55e4145369b9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1789&q=80"
+                            alt="as" width="100%" height="225">
+                        <div class="card-body text-left">
+                            <h2>HIIT</h2>
+                            <p class="card-text">Yoga uses breathing techniques,
+                                exercise and meditation. It helps
+                                to improve health and happiness.</p>
+                            <div>
+                                <small class="text-muted">Class Time: 4:00pm -
+                                    5:00pm</small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning">
+                                    Join Now!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1600965962102-9d260a71890d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+                            alt="as" width="100%" height="225">
+                        <div class="card-body text-left">
+                            <h2>Water Aerobics</h2>
+                            <p class="card-text">Yoga uses breathing techniques,
+                                exercise and meditation. It helps
+                                to improve health and happiness.</p>
+                            <div>
+                                <small class="text-muted">Class Time: 4:00pm -
+                                    5:00pm</small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning">
+                                    Join Now!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1499438075715-fc23ef376ab9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1416&q=80"
+                            alt="as" width="100%" height="225">
+                        <div class="card-body text-left">
+                            <h2>Cycling</h2>
+                            <p class="card-text">Yoga uses breathing techniques,
+                                exercise and meditation. It helps
+                                to improve health and happiness.</p>
+                            <div>
+                                <small class="text-muted">Class Time: 4:00pm -
+                                    5:00pm</small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning">
+                                    Join Now!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- <div class="col-md-4">
+
+                    <div class="card shadow-sm">
+                        <img
+                            src="https://images.unsplash.com/photo-1486215397028-cb4f31efea3e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1502&q=80"
+                            alt="as" width="100%" height="225">
+                        <div class="card-body text-left">
+                            <h2>Kickboxing</h2>
+                            <p class="card-text">Yoga uses breathing techniques,
+                                exercise and meditation. It helps
+                                to improve health and happiness.</p>
+                            <div>
+                                <small class="text-muted">Class Time: 4:00pm -
+                                    5:00pm</small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning">Sign
+                                    Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+            <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img
+                            src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1588&q=80"
+                            alt="as" width="100%" height="225">
+                        <div class="card-body text-left">
+                            <h2>Yoga</h2>
+                            <p class="card-text">Yoga uses breathing techniques,
+                                exercise and meditation. It helps
+                                to improve health and happiness.</p>
+                            <div>
+                                <small class="text-muted">Class Time: 4:00pm -
+                                    5:00pm</small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning">
+                                    Sign
+                            Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img
+                            src="https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80"
+                            alt="as" width="100%" height="225">
+                        <div class="card-body text-left">
+                            <h2>Strength</h2>
+                            <p class="card-text">Yoga uses breathing techniques,
+                                exercise and meditation. It helps
+                                to improve health and happiness.</p>
+                            <div>
+                                <small class="text-muted">Class Time: 4:00pm -
+                                    5:00pm</small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning">Sign
+                                    Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img
+                            src="https://images.unsplash.com/photo-1535743686920-55e4145369b9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1789&q=80"
+                            alt="as" width="100%" height="225">
+                        <div class="card-body text-left">
+                            <h2>HIIT</h2>
+                            <p class="card-text">Yoga uses breathing techniques,
+                                exercise and meditation. It helps
+                                to improve health and happiness.</p>
+                            <div>
+                                <small class="text-muted">Class Time: 4:00pm -
+                                    5:00pm</small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning">Sign
+                                    Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img
+                            src="https://images.unsplash.com/photo-1600965962102-9d260a71890d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+                            alt="as" width="100%" height="225">
+                        <div class="card-body text-left">
+                            <h2>Water Aerobics</h2>
+                            <p class="card-text">Yoga uses breathing techniques,
+                                exercise and meditation. It helps
+                                to improve health and happiness.</p>
+                            <div>
+                                <small class="text-muted">Class Time: 4:00pm -
+                                    5:00pm</small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning">Sign
+                                    Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img
+                            src="https://images.unsplash.com/photo-1499438075715-fc23ef376ab9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1416&q=80"
+                            alt="as" width="100%" height="225">
+                        <div class="card-body text-left">
+                            <h2>Cycling</h2>
+                            <p class="card-text">Yoga uses breathing techniques,
+                                exercise and meditation. It helps
+                                to improve health and happiness.</p>
+                            <div>
+                                <small class="text-muted">Class Time: 4:00pm -
+                                    5:00pm</small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning">Sign
+                                    Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col" id="test">
+                    <div class="card shadow-sm">
+                        <img
+                            src="https://images.unsplash.com/photo-1486215397028-cb4f31efea3e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1502&q=80"
+                            alt="as" width="100%" height="225">
+                        <div class="card-body text-left">
+                            <h2>Kickboxing</h2>
+                            <p class="card-text">Yoga uses breathing techniques,
+                                exercise and meditation. It helps
+                                to improve health and happiness.</p>
+                            <div>
+                                <small class="text-muted">Class Time: 4:00pm -
+                                    5:00pm</small>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning">Sign
+                                    Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</main>

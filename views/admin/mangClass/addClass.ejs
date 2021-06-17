@@ -1,0 +1,79 @@
+<head>
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link
+        href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet">
+    <script defer
+        src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script defer
+        src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+    <script defer
+        src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script defer src="/../../js/fileUpload.js"></script>
+    <style>
+ 
+    /* * FilePond Custom Styles */
+    .filepond--drop-label {
+     color: #0a132b;
+  }
+   .filepond--label-action {
+     text-decoration-color: #babdc0;
+  }
+   .filepond--panel-root {
+     background-color: #edf0f4;
+  }
+  /** * Page Styles */
+  
+   .filepond--root {
+     width: 360px;
+     height: 150px;
+    
+  }
+
+    </style>
+</head>
+<div class="container" style="background-color: unset;box-shadow: unset;">
+    <div class="row">
+        <div class="col-lg-6 col-md-offset-3">
+            <h1>Add a New Class</h1>
+            <form method="post">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="category_name">Type: </label>
+                            <input type="text" id="category_name"
+                                class="form-control" name="type">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="">Image: </label>
+                            <input type="file" id="filepond1"
+                                class="filepond" name="classImage">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category_name">Description: </label>
+                            <input type="text" name="description"
+                                class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Start Date: </label>
+                            <input type="datetime-local" id=""
+                                class="form-control" name="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product_price">End Date: </label>
+                            <input type="datetime-local" id=""
+                                class="form-control" name="endDate" required>
+                        </div>
+
+                        <button type="submit">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

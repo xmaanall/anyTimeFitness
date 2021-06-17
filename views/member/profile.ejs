@@ -1,0 +1,193 @@
+
+<head>
+
+    <!--File Pond -->
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link
+        href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet">
+    <script defer
+        src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script defer
+        src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+    <script defer
+        src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script defer src="/../../js/fileUpload.js"></script>
+
+    <!--End of File Pond -->
+    <style>
+    .container{
+      background-color: transparent;
+      box-shadow: none;
+    }
+    .footer{
+        position: fixed;
+    }
+      body{
+        margin-bottom: 100px;
+      }
+      /* * FilePond Custom Styles */
+   .filepond--drop-label {
+     color: #4c4e53;
+  }
+   .filepond--label-action {
+     text-decoration-color: #babdc0;
+  }
+   .filepond--panel-root {
+     background-color: #edf0f4;
+  }
+  /** * Page Styles */
+  
+   .filepond--root {
+     width: 170px;
+     margin: 0 auto;
+  }
+  .avatar{
+	width:170px;
+    height:170px;
+	margin: 0 auto;
+	border-radius: 50%;
+}
+#fileChooser {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  margin-top: 20px;
+  display:none
+}
+#profileImg {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  margin-top: 20px;
+
+}
+ion-icon {
+  font-size: 40px;
+  color:#fe7f2d;
+  position: absolute;
+  top: 200px;
+  left: 420px;
+  --ionicon-stroke-width: 45px;
+}
+    </style>
+</head>
+<div>
+    <form class="container" method="post" action="/member/updateByMemberId">
+        <div id="profileImg"> <img class="avatar" width="100"
+                height="100"
+                src="<%=result.coverImagePath%>"
+            alt=""></div>
+
+
+        <div id="fileChooser"> <input type="file" id="filepond"
+                class="filepond" name="cover"> </div>
+        <ion-icon name="create-outline" onclick="myFunction()"></ion-icon>
+        <label for="formGroupExampleInput" class="form-label">Name</label>
+        <input type="text" class="form-control"
+            id="formGroupExampleInput"
+            placeholder="Enter Your Name" name="name" value="<%=result.name%>"
+        required>
+        <div class="col-md-6">
+            <label for="formGroupExampleInput" class="form-label">height</label>
+            <input type="text" class="form-control"
+                id="formGroupExampleInput1"
+                name="height" value="<%=result.height%>" required>
+        </div>
+        <span>
+            <div class="col-md-6">
+                <label for="formGroupExampleInput" class="form-label">Weight</label>
+                <input type="text" class="form-control"
+                    id="formGroupExampleInput2"
+                    name="weight" value="<%=result.weight%>" required>
+            </div>
+        </span>
+
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input type="email" name="email" value="<%=result.email%>"
+            class="form-control" id="inputEmail4" required>
+        </div>
+        <div class="col-12">
+            <label for="inputAddress" class="form-label">Address</label>
+            <input type="text" class="form-control" id="inputAddress"
+                placeholder="1234 Main St" name="address" value="<%=result.address%>"
+            required>
+
+        </div>
+
+
+        <div class="col-12">
+            <label for="inputAddress2" class="form-label">Mobile</label>
+            <!-- pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" -->
+            <input type="tel" class="form-control" id="inputAddress2"
+                placeholder="Enter your mobile phone" name="mobile"
+                value="<%=result.mobile%>"
+            required>
+        </div>
+
+        <div class="col-12">
+            <label for="inputAddress2" class="form-label">Date</label>
+            <input type="Date" class="form-control" id="inputAddress2"
+                placeholder="Enter your Birthday" name="bDate" value="<%=result.bDate%>"
+            required>
+        </div>
+        <div class="col-md-4">
+            <label for="inputState" class="form-label">Gender</label>
+            <div>
+                <input class="form-check-input" type="radio"
+                    name="exampleRadios"
+                    id="exampleRadios1" value="option1" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                    Male
+                </label>
+            </div>
+            <span style="font-size:1rem">
+                <input class="form-check-input" type="radio"
+                    name="exampleRadios"
+                    id="exampleRadios2" value="option2">
+                <label class="form-check-label" for="exampleRadios2">
+                    Female
+                </label>
+            </span>
+
+
+
+
+
+            <div style="padding-left:450px;padding-top: 10px;">
+                <button type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+    <script>
+
+const btn = document.querySelector('#btn');
+    // handle click button
+    btn.onclick = function () {
+        const rbs = document.querySelectorAll('input[name="gender"]');
+        let selectedValue;
+        for (const rb of rbs) {
+            if (rb.checked) {
+                selectedValue = rb.value;
+                break;
+            }
+        }
+        alert(selectedValue);
+    };
+    
+    function myFunction() {
+  var x = document.getElementById("fileChooser");
+   var x1 = document.getElementById("profileImg");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    x1.style.display = "none";
+    
+  } else {
+    x.style.display = "none";
+    x1.style.display = "block";
+  }
+}
+
+</script>

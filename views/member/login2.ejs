@@ -1,0 +1,73 @@
+
+<style>
+	.footer{
+		position: fixed;
+	}
+	
+</style>
+
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form id="signupForm" class="formCenter">
+			<h1>Sign Up</h1>
+			<input type="text" placeholder="Name" name="name" id="name"
+				onkeypress="return /[a-z]/i.test(event.key)" required />
+			<span class="error"></span>
+			<input type="email" placeholder="Email" name="email" id="email" required />
+			<span class="error" id="emailError"></span>
+
+			<input type="password"
+				placeholder="Password" name="password" id="password"
+				required onKeyup="checkPass()" minlength="8" />
+			<div class="form-tooltip" style="justify-content: left;">Password must
+				contains:<br>
+				<ul>
+					<li>At least 1 uppercase letter</li>
+					<li>At least 1 lowercase letter</li>
+					<li>At least 1 special character</li>
+					<li>At least 1 number</li>
+				</ul>
+			</div>
+
+			<span class="error" id="passError"></span>
+			<input type="password" placeholder="Confirm password" name="confPassword"
+				id="confPassword"
+				required onKeyup="checkPass()" />
+			<span class="error" id="confPassword_msg"></span>
+			<button id="sign_up_btn" type="submit">Sign Up</button>
+
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form id="signInForm1" class="formCenter" action="/member/login"
+			method="POST">
+			<h1>Sign in</h1>
+
+			<input type="email" placeholder="Email" name="email" id="emailSignIn"
+				required/>
+			<span class="error" id="emailErrorSignIn"></span>
+
+			<input type="password" placeholder="Password" name="password"
+				id="passwordSignIn"
+				required />
+			<span class="error" id="passErrorSignIn"></span>
+
+			<a href="/member/forgot-password">Forgot your password?</a>
+			<button type="submit">Sign In</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>it's nice to see you again! <br/>sign in to access your account</p>
+					<button class="ghost" id="signIn">Sign In</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<h1>Hello!</h1>
+					<p>Enter your personal details and start journey with us</p>
+					<button class="ghost" id="signUp">Sign Up</button>
+				</div>
+			</div>
+		</div>
+	</div>
